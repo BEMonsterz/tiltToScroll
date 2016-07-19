@@ -10,7 +10,7 @@
 import UIKit
 import CoreMotion
 
-class TiltToScrollViewController: UIViewController {
+class TiltViewController: UIViewController {
     
     // outlets
     @IBOutlet weak var textView :UITextView!
@@ -25,7 +25,7 @@ class TiltToScrollViewController: UIViewController {
     
     private func setup() {
         
-        var speed :CGFloat = 0.0
+        var speed :CGFloat = 0.01
         var vertical :CGFloat = 0.0
         
         self.manager = CMMotionManager()
@@ -40,16 +40,16 @@ class TiltToScrollViewController: UIViewController {
                     fatalError("Gravity is not defined!")
                 }
                 
-                if accelerationY >= -0.58 && accelerationY <= -0.27 {
+                if accelerationY >= -0.50 && accelerationY <= -0.27 {
                     
-                    speed = 5
+                    speed = 2
                     vertical += self.textView.frame.origin.y + speed
                     let newOffset = CGPointMake(0, vertical)
                     self.textView.setContentOffset(newOffset, animated: true)
                 }
                     
                 else if accelerationY >= -0.92 && accelerationY <= -0.86 {
-                    speed = 5
+                    speed = 2
                     vertical -= self.textView.frame.origin.y + speed
                     let newOffset = CGPointMake(0, vertical)
                     self.textView.setContentOffset(newOffset, animated: true)
